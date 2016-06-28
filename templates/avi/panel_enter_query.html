@@ -1,15 +1,10 @@
 <div class="panel panel-info">
   <div class="panel-heading">
-    Available data products.
+    Profile report of a VOTable
   </div>
   <div class="panel-body">
-    {% if listdir %}
-      {% for product in listdir %}
-        <li>{{ product }}</li>
-      {% endfor %}
-    {% else %}
-      <li>No data products are available</li>
-    {% endif %}
+    Select a .vot file to perform a pandas-profiling report on. <br>
+    The AVI expects these files to be stored in /data/input/.
   </div>
 </div>
 
@@ -17,8 +12,12 @@
     <div class="form-group">
         
         <label for="input_vot">VOTable</label>
-        <input class="form-control" id="input_vot" name="input_vot" placeholder="Enter your VOTable here" required=true
-        value="{{listdir.0}}">
+        <select id="input_vot" name="input_vot" required=true class="form-control">
+            <option value="">---------</option>
+            {% for product in listdir %}
+            <option value="{{product}}">{{product}}</option>
+            {% endfor %}
+        </select>
         
         <label for="outfile">Output file</label>
         <input class="form-control" id="outfile" name="outfile" placeholder="Enter your output file here" required=true
